@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RubberDuck Control Room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./pubsub.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="layout">
+        <section class="stage">
+          <div class="stage__video-wrap" aria-hidden="true">
+            <video
+              class="stage__video"
+              autoplay
+              muted
+              loop
+              playsinline
+              webkit-playsinline
+              preload="auto"
+              poster=""
+            >
+              <source src="./swim2.mp4" type="video/mp4" />
+            </video>
+            <div class="stage__video-fallback"></div>
+            <div class="stage__overlay"></div>
+          </div>
+
+          <div class="status-card status-card--timer stage__timer" id="gameTimerCard">
+            <span class="status-card__label">게임 시간</span>
+            <span class="status-card__value" id="gameTimer">대기</span>
+            <span class="status-card__hint" id="gameTimerHint">게임 시작 버튼을 눌러주세요</span>
+          </div>
+
+          <section class="playfield" id="playfield" aria-label="러버덕 게임 화면">
+            <div class="playfield__grid"></div>
+            <div class="playfield__drain" aria-hidden="true"></div>
+          </section>
+        </section>
+
+        <aside class="sidebar">
+          <header class="hud">
+            <div class="hud__brand">
+              <p class="hud__eyebrow">Azure Web Pub/Sub</p>
+              <h1>RubberDuck Control Room</h1>
+            </div>
+
+            <div class="hud__status">
+              <div class="status-card">
+                <span class="status-card__label">연결 상태</span>
+                <span class="status-card__value" id="connectionStatus">Azure 연결 대기</span>
+              </div>
+              <div class="status-card">
+                <span class="status-card__label">최근 명령</span>
+                <span class="status-card__value" id="lastCommand">대기 중</span>
+              </div>
+              <div class="status-card">
+                <span class="status-card__label">왕관 러버덕</span>
+                <span class="status-card__value" id="activeDuck">대기 중</span>
+              </div>
+              <div class="status-card status-card--start">
+                <span class="status-card__label">게임 제어</span>
+                <button class="start-button" id="gameStartButton" type="button">
+                  게임 시작
+                </button>
+                <span class="status-card__hint" id="commStatus">시작 전에도 수신 대기 중</span>
+              </div>
+            </div>
+          </header>
+
+          <aside class="panel">
+            <div class="panel__section">
+              <div>
+                <p class="panel__title">조작 테스트</p>
+                <p class="panel__text">버튼은 즉시 이동, 화살표 키는 길게 누를수록 더 빠르게 움직입니다.</p>
+              </div>
+              <div class="panel__targets" id="targetChips"></div>
+            </div>
+
+            <div class="panel__section">
+              <p class="panel__title">명령</p>
+              <div class="command-grid" id="commandGrid"></div>
+            </div>
+
+            <div class="panel__section panel__section--fill">
+              <p class="panel__title">수신 데이터</p>
+              <pre class="panel__log" id="eventLog">수신 대기 중...</pre>
+            </div>
+          </aside>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

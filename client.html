@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RubberDuck Remote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./client.css" />
+    <script defer src="./pubsub.js"></script>
+    <script defer src="./client.js"></script>
+  </head>
+  <body>
+    <main class="remote-app">
+      <header class="remote-header">
+        <div>
+          <p class="eyebrow">RubberDuck Remote</p>
+          <h1>리모콘 앱</h1>
+          <p class="remote-note">Azure Web Pub/Sub로 직접 연결해 명령을 보냅니다.</p>
+        </div>
+        <button class="connect-btn" id="connectToggle" type="button" aria-pressed="false">연결</button>
+      </header>
+
+      <section class="status-bar">
+        <div class="status-tile">
+          <span class="status-label">상태</span>
+          <strong class="status-value" id="connectionState">대기 중</strong>
+        </div>
+        <div class="status-tile">
+          <span class="status-label">대상</span>
+          <strong class="status-value" id="targetState">대기 중</strong>
+        </div>
+        <div class="status-tile">
+          <span class="status-label">마지막 전송</span>
+          <strong class="status-value" id="lastSent">없음</strong>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <p class="card-title">대상 선택</p>
+            <p class="card-copy">앱에서 보낼 러버덕을 고르세요.</p>
+          </div>
+          <span class="pill" id="modeNote">대기 모드</span>
+        </div>
+        <div class="chip-row" id="targetChips"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <p class="card-title">방향 전송</p>
+            <p class="card-copy">8방향 명령을 즉시 전송합니다.</p>
+          </div>
+          <span class="pill pill--accent">Azure Web Pub/Sub</span>
+        </div>
+        <div class="pad" id="directionPad"></div>
+      </section>
+
+      <section class="card card--fill">
+        <div class="card-head">
+          <div>
+            <p class="card-title">전송 로그</p>
+            <p class="card-copy">리모콘에서 보낸 명령을 확인합니다.</p>
+          </div>
+        </div>
+        <pre class="log" id="eventLog">아직 전송하지 않았습니다.</pre>
+      </section>
+    </main>
+  </body>
+</html>
